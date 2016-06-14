@@ -1,4 +1,5 @@
 Django==1.9.6
+gunicorn==0.17.5
 Flask==0.11
 Flask-OAuth==0.12
 Jinja2==2.8
