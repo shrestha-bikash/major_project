@@ -41,7 +41,7 @@ facebook = oauth.remote_app('facebook',
     authorize_url='https://www.facebook.com/dialog/oauth',
     consumer_key=FACEBOOK_APP_ID,
     consumer_secret=FACEBOOK_APP_SECRET,
-    request_token_params={'scope': ('public_profile, email, user_posts')}
+    request_token_params={'scope': ('public_profile, email, user_status')}
 )
 
 data = np.loadtxt("static/trainingFeature.txt", delimiter =' ')
@@ -134,9 +134,9 @@ totalbagofwords = eval(tot)
 def getStatus(inpstatus):
     usermap = {}
     bagcount = {}
-
+    
     for row in inpstatus:
-
+            
             processedStatus = processStatus(row)
             featureVector = getFeatureVector(processedStatus, stopwords)
 
@@ -145,7 +145,7 @@ def getStatus(inpstatus):
                 bagcount[word] += 1
                 count = featureVector[word]
                 usermap[word] = count
-
+            
     print usermap
     maxcount = {}
     for i in usermap:
@@ -153,7 +153,7 @@ def getStatus(inpstatus):
             maxcount[i] = 0
         maxcount[i] = max(maxcount[i], usermap[i])
 
-
+    
 
     feature = [.5 + .5 * usermap[j] / (0 if j not in maxcount else maxcount[j])  if j in usermap else 0 for j in totalbagofwords]
         #feature = [1 * data[j]  if j in data else 0 for j in totalbagofwords]
@@ -212,7 +212,7 @@ def facebook_authorized(resp):
     #logfile.write(str(getme.headers))
     #logfile.write(str(getme.raw_data))
     #me = json.dumps
-    getposts = facebook.get('/me/posts?limit=1000')
+    getposts = facebook.get('/me/posts')
     data = getposts.data
     #data = json.dumps(data)
 
@@ -221,11 +221,11 @@ def facebook_authorized(resp):
     #mesg = open('posts.txt','w')
 
     if 'id' in me and 'name' in me:
-
+        
         user_id = int(me['id'])
         user_name = str(me['name'])
 
-
+    
     for i in data['data']:
         for k in i:
             if k == 'message':
@@ -236,7 +236,7 @@ def facebook_authorized(resp):
                 mesg.write("\n"+str(msg.encode('utf-8')))
                 logfile.write("\n"+str(msg.encode('utf-8')))
                 try:
-
+                    
                     sql = 'insert into user_status values('
                     sql += str(user_id)
                     sql += ', "'
@@ -249,9 +249,9 @@ def facebook_authorized(resp):
                     #logfile.write("\nSQL is "+sql)
 
                     # Execute the SQL command
-                    cursor.execute(sql)
+                    cursor.execute(sql)    
 
-                    # Commit your changes in the database
+                    # Commit your changes in the database               
                     db.commit()
                 except mysqldb.DatabaseError as err:
                     logfile.write('\ndatabase exception\n')
@@ -259,11 +259,11 @@ def facebook_authorized(resp):
                     logfile.write('\n')
                     # Rollback in case there is any error
                     db.rollback()
-
+                
                 '''
-
-
-
+    
+    
+    
     #mesg.close()
     feature = getStatus(posts)
     #testpca = decomposition.PCA(n_components = 10).fit(feature)
@@ -273,7 +273,7 @@ def facebook_authorized(resp):
     ext = svm_Model(X, y[2], feature)
     agr = svm_Model(X, y[3], feature)
     neu = svm_Model(X, y[4], feature)
-
+    
     #logfile.write(feature)
     #logfile.close()
     session['user'] = user_name
@@ -300,5 +300,5 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)
 
 # disconnect from server
-#db.close()
-#logfile.close()
+db.close()
+logfile.close()
