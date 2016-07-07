@@ -1,6 +1,7 @@
 Django==1.9.6
 gunicorn==17.5
 Flask==0.11
+Flask-SQLAlchemy==2.1
 Flask-OAuth==0.12
 Jinja2==2.8
 MarkupSafe==0.23
@@ -17,3 +18,6 @@ requests==2.2.1
 scikit-learn==0.14.1
 scipy==0.13.3
 simplejson==3.3.1
+psycopg2==2.6.1
+SQLAlchemy==1.0.12
+Werkzeug==0.11.9

@@ -4,7 +4,8 @@ import re
 import random
 import operator
 import numpy as np
-import MySQLdb as mysqldb
+#import MySQLdb as mysqldb
+from flask.ext.sqlalchemy import SQLAlchemy
 from sklearn import svm
 from sklearn import decomposition
 from sklearn.multiclass import OneVsRestClassifier
@@ -13,16 +14,9 @@ from flask import url_for, request, session, redirect
 from flask_oauth import OAuth
 
 
-#logfile = open('log','w')
 SECRET_KEY = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 FACEBOOK_APP_ID = '1309139539100169'
 FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
-
-# Open database connection
-#db = mysqldb.connect("localhost","root","asdf","personalityPredict" )
-
-# prepare a cursor object using cursor() method
-#cursor = db.cursor()
 
 
 # initialization
@@ -156,7 +150,6 @@ def getStatus(inpstatus):
 
 
     feature = [.5 + .5 * usermap[j] / (0 if j not in maxcount else maxcount[j])  if j in usermap else 0 for j in totalbagofwords]
-        #feature = [1 * data[j]  if j in data else 0 for j in totalbagofwords]
     return feature
 
 # controllers
@@ -194,36 +187,27 @@ def facebook_login():
 @app.route("/facebook_authorized")
 @facebook.authorized_handler
 def facebook_authorized(resp):
-    #global logfile
-    #logfile.write("\nresp: ")
-    #logfile.write(str(resp))
+
     next_url = request.args.get('next') or url_for('index')
     if resp is None or 'access_token' not in resp:
         return redirect(next_url)
 
     session['logged_in'] = True
     session['oauth_token'] = (resp['access_token'], '')
-    #logfile.write("\ntoken: ")
-    #logfile.write(resp['access_token'])
+
 
     getme = facebook.get('/me')
     me = getme.data
-    #logfile.write("\nme: ")
-    #logfile.write(str(getme.headers))
-    #logfile.write(str(getme.raw_data))
-    #me = json.dumps
+
     getposts = facebook.get('/me/posts?limit=1000')
     data = getposts.data
-    #data = json.dumps(data)
-
 
     posts = []
-    #mesg = open('posts.txt','w')
 
     if 'id' in me and 'name' in me:
 
         user_id = int(me['id'])
-        user_name = str(me['name'])
+        user_name = str(me['name'].encode('utf-8'))
 
 
     for i in data['data']:
@@ -263,8 +247,6 @@ def facebook_authorized(resp):
                 '''
 
 
-
-    #mesg.close()
     feature = getStatus(posts)
     #testpca = decomposition.PCA(n_components = 10).fit(feature)
     #Xt = testpca.transform(feature)
@@ -274,9 +256,7 @@ def facebook_authorized(resp):
     agr = svm_Model(X, y[3], feature)
     neu = svm_Model(X, y[4], feature)
 
-    #logfile.write(feature)
-    #logfile.close()
-    session['user'] = user_name
+    session['user'] = me['name']
     session['id'] = user_id
     session['opn'] = opn[0]
     session['con'] = con[0]
@@ -301,4 +281,3 @@ if __name__ == "__main__":
 
 # disconnect from server
 #db.close()
-#logfile.close()
