@@ -216,36 +216,6 @@ def facebook_authorized(resp):
                 msg = i['message']
                 posts.append(str(msg.encode('utf-8')))
 
-                '''
-                mesg.write("\n"+str(msg.encode('utf-8')))
-                logfile.write("\n"+str(msg.encode('utf-8')))
-                try:
-
-                    sql = 'insert into user_status values('
-                    sql += str(user_id)
-                    sql += ', "'
-                    sql += user_name
-                    sql +='", "'
-                    sql += mysqldb.escape_string(msg.encode('utf-8'))
-                    sql += '")'
-
-
-                    #logfile.write("\nSQL is "+sql)
-
-                    # Execute the SQL command
-                    cursor.execute(sql)
-
-                    # Commit your changes in the database
-                    db.commit()
-                except mysqldb.DatabaseError as err:
-                    logfile.write('\ndatabase exception\n')
-                    logfile.write(format(err))
-                    logfile.write('\n')
-                    # Rollback in case there is any error
-                    db.rollback()
-
-                '''
-
 
     feature = getStatus(posts)
     #testpca = decomposition.PCA(n_components = 10).fit(feature)
@@ -278,6 +248,3 @@ def logout():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
-
-# disconnect from server
-#db.close()
