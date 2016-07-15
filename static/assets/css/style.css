@@ -15,7 +15,7 @@ body {
     padding-bottom:50px;
 }
 /*=====================================
-  NAVBAR STYLES 
+  NAVBAR STYLES
     ===================================*/
 
 .logo-custom {
@@ -46,7 +46,7 @@ body {
 
 
 /*=====================================
-  HOME STYLES 
+  HOME STYLES
     ===================================*/
 .home-sec {
     padding-top: 10px;
@@ -96,7 +96,7 @@ body {
     margin: 5px;
 }
 /*=====================================
-  TAG LINE STYLES 
+  TAG LINE STYLES
     ===================================*/
 
 .tag-line {
@@ -116,7 +116,7 @@ body {
             margin-right: 8px;
         }
 /*=====================================
-  HEADER LINE STYLES 
+  HEADER LINE STYLES
     ===================================*/
 .header-line {
     font-weight: 900;
@@ -135,7 +135,7 @@ h1::after {
 }
 
 /*=====================================
-  ABOUT STYLES 
+  ABOUT STYLES
   ===================================*/
 .about-div {
     padding: 30px;
@@ -190,7 +190,7 @@ h1::after {
     margin-bottom: 20px;
 }
 /*=====================================
-  FACULTY STYLES 
+  FACULTY STYLES
   ===================================*/
 #faculty-sec {
     background-color: #000;
@@ -228,7 +228,7 @@ h1::after {
     }
 
 /*=====================================
-  CONTACT STYLES 
+  CONTACT STYLES
   ===================================*/
 #contact-sec {
     padding-top: 10px;
@@ -254,7 +254,7 @@ h1::after {
     color:#fff;
 }
 /*=====================================
-  Footer STYLES 
+  Footer STYLES
   ===================================*/
 #footer {
     padding:5px 20px;
@@ -262,4 +262,37 @@ h1::after {
     text-align:right;
     color:#fff;
     font-size:15px;
+}
+
+/* Add animation to "page content" */
+
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
+
+
+.progress {
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    text-align: left;
+}
+
+.rating-desc {
+      padding: 10px;
 }

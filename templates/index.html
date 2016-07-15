@@ -3,19 +3,81 @@
 
 {% block content %}
 {% if not session.logged_in %}
-     <p data-scroll-reveal="enter from the bottom after 0.03s">You are not logged in.</p>
+     <p data-scroll-reveal="enter from the bottom after 0.03s">You are not logged in. Please log in to see your personality traits.</p>
+
 {% else %}
-     <p data-scroll-reveal="enter from the bottom after 0.03s">Hello ... {{session.pop('user')}}<br> Here are the score for your Big Five personality traits.</p>
+     <p data-scroll-reveal="enter from the bottom after 0.03s">Hello ... {{ session.pop('user') }}<br> Check the score for your Big Five personality traits.</p>
      <br>
-     <p>Openness = {{ session.pop('opn')}}</p>
+     <button onclick="myFunction()" data-scroll-reveal="enter from the bottom after 0.03s" class="btn btn-primary" >Check your Traits score</button><br><br>
+      <div  id="demo" style="display:none;">
+        <i class="fa fa-refresh fa-spin fa-4x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
 
-     <p>Concientiousness = {{ session.pop('con')}}</p>
+      <div id="result" style="display:none;" class="animate-bottom">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10" >
+                <div class="well well-sm" style="padding:20px;">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12" >
 
-     <p>Extroversion = {{ session.pop('ext')}}</p>
 
-     <p>Agreeableness = {{ session.pop('agr')}}</p>
+                                <div class ="row rating-desc" style="padding:5px;">
+                                  <div class="col-xs-3 col-md-3 text-left">Openness:</div>
+                                  <div class="col-xs-8 col-md-9">
+                                      <div class="progress">
+                                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                              aria-valuemin="0" aria-valuemax="100" style="width: {{ session.pop('opn')}}%"> {{ session.pop('opn_score')}} %</div>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class ="row rating-desc" style="padding:5px;">
+                                  <div class="col-xs-3 col-md-3 text-left">Conscientiousness:</div>
+                                  <div class="col-xs-8 col-md-9">
+                                      <div class="progress">
+                                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                              aria-valuemin="0" aria-valuemax="100" style="width: {{ session.pop('con')}}%"> {{ session.pop('con_score')}} %</div>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class ="row rating-desc" style="padding:5px;">
+                                  <div class="col-xs-3 col-md-3 text-left">Extroversion:</div>
+                                  <div class="col-xs-8 col-md-9">
+                                      <div class="progress">
+                                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                              aria-valuemin="0" aria-valuemax="100" style="width: {{ session.pop('ext')}}%"> {{ session.pop('ext_score')}} % </div>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class ="row rating-desc" style="padding:5px;">
+                                  <div class="col-xs-3 col-md-3 text-left">Agreeableness:</div>
+                                  <div class="col-xs-8 col-md-9">
+                                      <div class="progress">
+                                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                              aria-valuemin="0" aria-valuemax="100" style="width: {{ session.pop('agr')}}%"> {{ session.pop('agr_score')}} %</div>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class ="row rating-desc" style="padding:5px;">
+                                  <div class="col-xs-3 col-md-3 text-left">Neuroticism:</div>
+                                  <div class="col-xs-8 col-md-9">
+                                      <div class="progress">
+                                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                              aria-valuemin="0" aria-valuemax="100" style="width: {{ session.pop('neu')}}%"> {{ session.pop('neu_score')}} %</div>
+                                      </div>
+                                  </div>
+                                </div>
 
-     <p>Neuroticsm = {{ session.pop('neu')}}</p>
+                            <!-- end row -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+      </div>
 
      <!--{% for item in session.pop('fbpost', []) %}
     	{{ item }}

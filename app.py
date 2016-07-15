@@ -4,7 +4,6 @@ import re
 import random
 import operator
 import numpy as np
-#import MySQLdb as mysqldb
 from flask.ext.sqlalchemy import SQLAlchemy
 from sklearn import svm
 from sklearn import decomposition
@@ -228,11 +227,17 @@ def facebook_authorized(resp):
 
     session['user'] = me['name']
     session['id'] = user_id
-    session['opn'] = opn[0]
-    session['con'] = con[0]
-    session['ext'] = ext[0]
-    session['agr'] = agr[0]
-    session['neu'] = neu[0]
+    
+    session['opn'] = int(opn[0])*100/5
+    session['con'] = int(con[0])*100/5
+    session['ext'] = int(ext[0])*100/5
+    session['agr'] = int(agr[0])*100/5
+    session['neu'] = int(neu[0])*100/5
+    session['opn_score'] = int(opn[0])*100/5
+    session['con_score'] = int(con[0])*100/5
+    session['ext_score'] = int(ext[0])*100/5
+    session['agr_score'] = int(agr[0])*100/5
+    session['neu_score'] = int(neu[0])*100/5
 
     return redirect(next_url)
 
