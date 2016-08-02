@@ -165,6 +165,15 @@ def favicon():
 def page_not_found(e):
     return render_template('404.html'), 404
 
+@app.route("/privacy")
+def privacy():
+    return render_template('privacy.html')
+
+@app.route("/tos")
+def tos():
+    return render_template('tos.html')
+
+
 #----------------------------------------
 # facebook authentication
 #----------------------------------------
@@ -227,17 +236,18 @@ def facebook_authorized(resp):
 
     session['user'] = me['name']
     session['id'] = user_id
-    
+
     session['opn'] = int(opn[0])*100/5
     session['con'] = int(con[0])*100/5
     session['ext'] = int(ext[0])*100/5
     session['agr'] = int(agr[0])*100/5
     session['neu'] = int(neu[0])*100/5
-    session['opn_score'] = int(opn[0])*100/5
-    session['con_score'] = int(con[0])*100/5
-    session['ext_score'] = int(ext[0])*100/5
-    session['agr_score'] = int(agr[0])*100/5
-    session['neu_score'] = int(neu[0])*100/5
+
+    session['opn_score'] = int(opn[0])
+    session['con_score'] = int(con[0])
+    session['ext_score'] = int(ext[0])
+    session['agr_score'] = int(agr[0])
+    session['neu_score'] = int(neu[0])
 
     return redirect(next_url)
 
