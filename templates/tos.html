@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta property="fb:app_id" content="1317247704956019" />
+    <meta property="og:title" content="Predicting Personality traits "/>
+    <meta property="og:type" content="user_posts"/>
+    <meta property="og:url" content="http://localhost:5000/"/>
+    <meta property="og:site_name" content="my_new_app"/>
+    <meta property="og:description" content="How does user posts show the personality?"/>
+    <title>Predict Your Personality</title>
+    <!-- BOOTSTRAP CORE STYLE CSS -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap-social.css') }}">
+    <!-- FONT AWESOME CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css') }}">
+
+
+         <!-- FLEXSLIDER CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flexslider.css') }}">
+
+
+        <!-- CUSTOM STYLE CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
+
+
+  </head>
+
+
+  <body>
+
+      <!--Navbar section started -->
+   <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
+          <div class="container">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/"><p class="logo-custom">PersonalityPredict</p></a>
+              </div>
+
+          </div>
+      </div>
+        <!--NAVBAR SECTION END-->
+    <div class="home">
+      <div class="container">
+        <h3>Terms of Services</h3>
+        <p>These are terms of services for our project.</p>
+        <h4>General Provisions</h4>
+        <p>Welcome to the “Personality Analysis using Facebook Data”. These are the terms and conditions (Terms) which govern your use of website.
+These Terms apply regardless of whatever user device you are using (including desktop, laptop or mobile web browser).
+You will be deemed to have agreed to be bound by these Terms when you use, access or browse the site, register your details with us or subscribe for email or online services or send us an email.</p>
+        <h4> Participant’s Personal Information</h4>
+        <p>Using the service, you agree to be bound by our privacy policy as described. You will also respect the laws and regulations applicable in your countries concerning the collecting, storing and using personal information in an electronic format.
+          <br>
+You will finally be bound by Facebook’s rules regarding collecting, storing and using personal information collected through the use of Facebook. Your privacy  is a great concern for us and you commit to agree to the personal information collected through the service on your own consent.
+</p>
+        <h4>Changes to this terms</h4>
+        <p>We may change these Terms from time to time. Please check these Terms regularly as any changes are effective immediately upon posting to the site. Your continued use of the site after posting will be deemed acceptance of the changes.</p>
+        <h4>About Us</h4>
+        <p>Our site is for educational purpose (as per required for the project completion of undergraduate). This is a prediction of your personality traits based on your Facebook status. It uses a snapshot of your digital footprint to visualize how others perceive you online and therefore may not be an entirely accurate picture of who you really are. </p>
+        <h4>Access and use of site.</h4>
+        <p>You  use the site for personal non-commercial use only. To use it facebook user_id and password is must.</p>
+        <h4> Facebook terms of services</h4>
+        <p>In order to use the Service and participate into any application, you need to comply with Facebook terms and services. In particular, you shall use your real identity in your Facebook account and shall not create multiple “fake” accounts. If you participate in any Application using a Facebook account not being your real identity, your participation will be disabled without further notice</p>
+        <h4>Charges</h4>
+        <p>We reserve the right to charge any fee for any service, currently provided at no cost.</p>
+        <h4>Questions</h4>
+        <p>If you have any questions about these terms, please email us at  contact.fbpersonality@gmail.com.</p>
+
+      </div>
+    </div>
+
+
+    <div id="footer">
+      <a href="/privacy">Privacy Policy </a>
+      <a href="/tos"> Terms of Services</a>
+      <p>Developed by : Bikash, Bishal, Kiran and Manil</p>
+    </div>
+     <!-- FOOTER SECTION END-->
+
+    <!--  Jquery Core Script -->
+    <script src="../static/assets/js/jquery-1.10.2.js"></script>
+    <!--  Core Bootstrap Script -->
+    <script src="../static/assets/js/bootstrap.js"></script>
+    <!--  Flexslider Scripts -->
+         <script src="../static/assets/js/jquery.flexslider.js"></script>
+     <!--  Scrolling Reveal Script -->
+    <script src="../static/assets/js/scrollReveal.js"></script>
+    <!--  Scroll Scripts -->
+    <script src="../static/assets/js/jquery.easing.min.js"></script>
+    <!--  Custom Scripts -->
+    <script src="../static/assets/js/custom.js"></script>
+
+
+
+  </body>
+</html>

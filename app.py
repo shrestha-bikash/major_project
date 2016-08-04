@@ -210,6 +210,9 @@ def facebook_authorized(resp):
     getposts = facebook.get('/me/posts?limit=1000')
     data = getposts.data
 
+    user_photo = facebook.get('/me/picture?type=large&redirect=false').data
+    photo_url = user_photo['data']['url']
+
     posts = []
 
     if 'id' in me and 'name' in me:
@@ -236,6 +239,7 @@ def facebook_authorized(resp):
 
     session['user'] = me['name']
     session['id'] = user_id
+    session['url'] = photo_url
 
     session['opn'] = int(opn[0])*100/5
     session['con'] = int(con[0])*100/5

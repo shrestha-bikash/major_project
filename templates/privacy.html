@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta property="fb:app_id" content="1317247704956019" />
+    <meta property="og:title" content="Predicting Personality traits "/>
+    <meta property="og:type" content="user_posts"/>
+    <meta property="og:url" content="http://localhost:5000/"/>
+    <meta property="og:site_name" content="my_new_app"/>
+    <meta property="og:description" content="How does user posts show the personality?"/>
+    <title>Predict Your Personality</title>
+    <!-- BOOTSTRAP CORE STYLE CSS -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap-social.css') }}">
+    <!-- FONT AWESOME CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css') }}">
+
+
+         <!-- FLEXSLIDER CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flexslider.css') }}">
+
+
+        <!-- CUSTOM STYLE CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
+
+
+  </head>
+
+
+  <body>
+
+      <!--Navbar section started -->
+   <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
+          <div class="container">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/"><p class="logo-custom">PersonalityPredict</p></a>
+              </div>
+
+          </div>
+      </div>
+        <!--NAVBAR SECTION END-->
+  <div class='home'>
+    <div class="container">
+      <h3>Privacy Policy</h3>
+      <p>Your privacy is important to us, be assured that we are doing our very best to protect it and avoid any misuse or abuse of your personal data. This Policy explains how your personal information is collected and used by our website. </P>
+      <h4>Application Privacy Statement </h4>
+
+      <p>This privacy statement (“Privacy Statement”) applies to the treatment of personally identifiable information submitted by, or otherwise obtained from you. By using or otherwise accessing the application, you acknowledge that you accept the practices and policies outlined in this Privacy Statement. </p>
+
+      <h4>WHAT PERSONAL INFORMATION DO WE COLLECT? </h4>
+
+      <p>We collect the following types of information from our users:
+      <li>Name, email address, birth date, gender</li>
+      <li>Status from user posts</li></p>
+      <p>At each time information is collected about you, you will be clearly informed about the type of collected information. No personal information will be collected without your explicit consent.
+      You can always refuse to provide personal information to us but, most of the time, if you choose so, you will not be eligible to use the application.</p>
+      <h4>Personal Information You Provide to Us:</h4>
+      <p>We may receive and store any information you submit to the application(or otherwise authorize us to obtain – such as, from your Facebook account). The types of personal information collected may include your full name, email address, gender, username, user posts, demographic information, and any other information necessary for us to provide the services.</p>
+      <h4>Personal Information Collected Automatically:</h4>
+      <p>We receive and store certain types of information automatically like your username, email id, cookies. </p>
+      <h4>HOW YOUR INFORMATION MAY BE USED? </h4>
+      <p>We use the information described in this Privacy Statement (i) internally, to analyze, develop and improve its products and services, and (ii) as set forth below in the “Will We Share any of the personal information we receive?” section below. </p>
+      <h4>WILL WE SHARE ANY OF THE PERSONAL INFORMATION WE RECEIVE? </h4>
+      <p>Personal information about our user is an integral part of our project. We neither rent nor sell your personal information to anyone. We will keep your information strictly confidential and will not make any commercial use of it. We might however store your personal information to improve and update our system’s performance.</p>
+      <h4>CONDITIONS OF USE. </h4>
+      <p>If you decide to use or otherwise access the application, your use/access and any possible dispute over privacy is subject to this Privacy Statement and our Terms of Use.</p>
+      <h4>WHAT PERSONAL INFORMATION CAN I ACCESS? </h4>
+      <p>We allow you to access the following information about you for the purpose of viewing, and in certain situations, updating that information. This list may change in the event the application changes. <li>Account and user profile information</li>
+        <li>Application specific data </li></p>
+      <h4>CAN CHILDREN USE THE APPLICATION? </h4>
+      <p>Our site and the services available through us are not intended for children under the age of 13. We don’t knowingly or specifically collect information about children under the age of 13 and believe that children of any age should get their parents’ consent before giving out any personal information. We encourage you to participate in your child’s web experience. </p>
+      <h4>CHANGES TO THIS PRIVACY STATEMENT. </h4>
+      <p>We may amend this Privacy Statement from time to time. Use of information we collect now is subject to the Privacy Statement in effect at the time such information is used. If we make changes in the way we use personal information, we will notify you by posting an announcement on our site or sending you an email. Users are bound by any changes to the Privacy Statement when he or she uses or otherwise accesses the site after such changes have been first posted.</p>
+      <h4>QUESTIONS OR CONCERNS. </h4>
+      <p>If you have any questions or concerns regarding privacy on our website, please send us a detailed message at contact.fbpersonality@gmail.com. We will make every effort to resolve your concerns.</p>
+      <h4>COOKIES</h4>
+      <p>Cookies are used to keep you logged in and store information necessary for the function of our system. Cookies are not used to track you.</p>
+      <h4>SECURITY</h4>
+      <p>The security of your personal information is important to us.
+We use reasonable measures to safeguard data against unauthorized use and theft.</p>
+      <h4></h4>
+      <p></p>
+
+    </div>
+  </div>
+
+
+    <div id="footer">
+      <a href="/privacy">Privacy Policy </a>
+      <a href="/tos"> Terms of Services</a>
+      <p>Developed by : Bikash, Bishal, Kiran and Manil</p>
+    </div>
+     <!-- FOOTER SECTION END-->
+
+    <!--  Jquery Core Script -->
+    <script src="../static/assets/js/jquery-1.10.2.js"></script>
+    <!--  Core Bootstrap Script -->
+    <script src="../static/assets/js/bootstrap.js"></script>
+    <!--  Flexslider Scripts -->
+         <script src="../static/assets/js/jquery.flexslider.js"></script>
+     <!--  Scrolling Reveal Script -->
+    <script src="../static/assets/js/scrollReveal.js"></script>
+    <!--  Scroll Scripts -->
+    <script src="../static/assets/js/jquery.easing.min.js"></script>
+    <!--  Custom Scripts -->
+    <script src="../static/assets/js/custom.js"></script>
+
+
+
+  </body>
+</html>
