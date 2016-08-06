@@ -4,7 +4,7 @@ import re
 import random
 import operator
 import numpy as np
-from flask.ext.sqlalchemy import SQLAlchemy
+#from flask.ext.sqlalchemy import SQLAlchemy
 from sklearn import svm
 from sklearn import decomposition
 from sklearn.multiclass import OneVsRestClassifier
@@ -121,11 +121,11 @@ stopwords = getStopWordList('static/project/stopwords.txt')
 tot = open('static/bagofword.txt', 'r').read()
 totalbagofwords = eval(tot)
 
-
+usermap = {}
 
 
 def getStatus(inpstatus):
-    usermap = {}
+
     bagcount = {}
 
     for row in inpstatus:
@@ -139,7 +139,7 @@ def getStatus(inpstatus):
                 count = featureVector[word]
                 usermap[word] = count
 
-    print usermap
+
     maxcount = {}
     for i in usermap:
         if i not in maxcount:
@@ -208,7 +208,11 @@ def facebook_authorized(resp):
     me = getme.data
 
     getposts = facebook.get('/me/posts?limit=1000')
-    data = getposts.data
+    if getposts.status == 200:
+        data = getposts.data
+    else:
+        getposts =None
+        flash('Unable to load the posts from facebook.')
 
     user_photo = facebook.get('/me/picture?type=large&redirect=false').data
     photo_url = user_photo['data']['url']
@@ -240,6 +244,8 @@ def facebook_authorized(resp):
     session['user'] = me['name']
     session['id'] = user_id
     session['url'] = photo_url
+    session['wordlist'] = usermap
+    session['wordCount'] = len(usermap)
 
     session['opn'] = int(opn[0])*100/5
     session['con'] = int(con[0])*100/5

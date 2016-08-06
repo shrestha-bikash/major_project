@@ -299,3 +299,12 @@ h1::after {
 .home{
   padding-top: 60px;
 }
+.trait-size{
+  font-size: 0.9em;
+  color: #a0a0a0;
+  padding: 0px;
+}
+.trait-size-big{
+  font-size: 1.1em;
+
+}
