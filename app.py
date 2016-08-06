@@ -4,7 +4,7 @@ import re
 import random
 import operator
 import numpy as np
-#from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.sqlalchemy import SQLAlchemy
 from sklearn import svm
 from sklearn import decomposition
 from sklearn.multiclass import OneVsRestClassifier
