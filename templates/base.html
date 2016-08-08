@@ -321,6 +321,99 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
             temp['size'] = {{value}}*20;
             word_list.push(temp);
            {% endfor %}
+
+           //  for making the trait label shown and hidden plus progress bar changing the color
+            if ({{ session['opn_score'] }}<3){
+
+              document.getElementById("opn").className = "progress-bar progress-bar-warning";
+              document.getElementById("opn-left").style.color = "black";
+              document.getElementById("opn-left").style.fontWeight = 600;
+
+            }
+            else if ({{ session['opn_score'] }}<2) {
+              document.getElementById("opn").className = "progress-bar progress-bar-danger";
+
+            }
+            else{
+
+              document.getElementById("opn").className = "progress-bar progress-bar-success";
+              document.getElementById("opn-right").style.color = "black";
+              document.getElementById("opn-right").style.fontWeight = 600;
+
+            }
+
+
+            if ({{ session['con_score'] }}<3){
+              document.getElementById("con").className = "progress-bar progress-bar-warning";
+              document.getElementById("con-left").style.color = "black";
+              document.getElementById("con-left").style.fontWeight = 600;
+
+            }
+            else if ({{ session['con_score'] }}<2) {
+              document.getElementById("con").className = "progress-bar progress-bar-danger";
+
+            }
+            else{
+              document.getElementById("con").className = "progress-bar progress-bar-success";
+              document.getElementById("con-right").style.color = "black";
+              document.getElementById("con-right").style.fontWeight = 600;
+
+            }
+
+
+            if ({{ session['ext_score'] }}<3){
+              document.getElementById("ext").className = "progress-bar progress-bar-warning";
+              document.getElementById("ext-left").style.color = "black";
+              document.getElementById("ext-left").style.fontWeight = 600;
+
+            }
+            else if ({{ session['agr_score'] }}<2) {
+              document.getElementById("agr").className = "progress-bar progress-bar-danger";
+
+            }
+            else{
+              document.getElementById("ext").className = "progress-bar progress-bar-success";
+              document.getElementById("ext-right").style.color = "black";
+              document.getElementById("ext-right").style.fontWeight = 600;
+
+            }
+
+
+            if ({{ session['agr_score'] }}<3){
+              document.getElementById("agr").className = "progress-bar progress-bar-warning";
+              document.getElementById("agr-left").style.color = "black";
+              document.getElementById("agr-left").style.fontWeight = 600;
+            }
+            else if ({{ session['agr_score'] }}<2) {
+              document.getElementById("agr").className = "progress-bar progress-bar-danger";
+
+            }
+            else{
+              document.getElementById("agr").className = "progress-bar progress-bar-success";
+              document.getElementById("agr-right").style.color = "black";
+              document.getElementById("agr-right").style.fontWeight = 600;
+
+            }
+
+
+            if ({{ session['neu_score'] }}<3){
+              document.getElementById("neu").className = "progress-bar progress-bar-warning";
+              document.getElementById("neu-left").style.color = "black";
+              document.getElementById("neu-left").style.fontWeight = 600;
+
+            }
+            else if ({{ session['neu_score'] }}<2) {
+              document.getElementById("neu").className = "progress-bar progress-bar-danger";
+
+            }
+            else{
+              document.getElementById("neu").className = "progress-bar progress-bar-success";
+              document.getElementById("neu-right").style.color = "black";
+              document.getElementById("neu-right").style.fontWeight = 600;
+            }
+
+
+
          {% endif %}
 
          var color = d3.scale.linear()
@@ -371,97 +464,7 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
 
        }
 
-      //  for making the trait label shown and hidden plus progress bar changing the color
-       if ({{ session['opn_score'] }}<3){
-
-         document.getElementById("opn").className = "progress-bar progress-bar-warning";
-         document.getElementById("opn-left").style.color = "black";
-         document.getElementById("opn-left").style.fontWeight = 600;
-
-       }
-       else if ({{ session['opn_score'] }}<2) {
-         document.getElementById("opn").className = "progress-bar progress-bar-danger";
-
-       }
-       else{
-
-         document.getElementById("opn").className = "progress-bar progress-bar-success";
-         document.getElementById("opn-right").style.color = "black";
-         document.getElementById("opn-right").style.fontWeight = 600;
-
-       }
-
-
-       if ({{ session['con_score'] }}<3){
-         document.getElementById("con").className = "progress-bar progress-bar-warning";
-         document.getElementById("con-left").style.color = "black";
-         document.getElementById("con-left").style.fontWeight = 600;
-
-       }
-       else if ({{ session['con_score'] }}<2) {
-         document.getElementById("con").className = "progress-bar progress-bar-danger";
-
-       }
-       else{
-         document.getElementById("con").className = "progress-bar progress-bar-success";
-         document.getElementById("con-right").style.color = "black";
-         document.getElementById("con-right").style.fontWeight = 600;
-
-       }
-
-
-       if ({{ session['ext_score'] }}<3){
-         document.getElementById("ext").className = "progress-bar progress-bar-warning";
-         document.getElementById("ext-left").style.color = "black";
-         document.getElementById("ext-left").style.fontWeight = 600;
-
-       }
-       else if ({{ session['agr_score'] }}<2) {
-         document.getElementById("agr").className = "progress-bar progress-bar-danger";
-
-       }
-       else{
-         document.getElementById("ext").className = "progress-bar progress-bar-success";
-         document.getElementById("ext-right").style.color = "black";
-         document.getElementById("ext-right").style.fontWeight = 600;
-
-       }
-
-
-       if ({{ session['agr_score'] }}<3){
-         document.getElementById("agr").className = "progress-bar progress-bar-warning";
-         document.getElementById("agr-left").style.color = "black";
-         document.getElementById("agr-left").style.fontWeight = 600;
-       }
-       else if ({{ session['agr_score'] }}<2) {
-         document.getElementById("agr").className = "progress-bar progress-bar-danger";
-
-       }
-       else{
-         document.getElementById("agr").className = "progress-bar progress-bar-success";
-         document.getElementById("agr-right").style.color = "black";
-         document.getElementById("agr-right").style.fontWeight = 600;
-
-       }
-
-
-       if ({{ session['neu_score'] }}<3){
-         document.getElementById("neu").className = "progress-bar progress-bar-warning";
-         document.getElementById("neu-left").style.color = "black";
-         document.getElementById("neu-left").style.fontWeight = 600;
-
-       }
-       else if ({{ session['neu_score'] }}<2) {
-         document.getElementById("neu").className = "progress-bar progress-bar-danger";
-
-       }
-       else{
-         document.getElementById("neu").className = "progress-bar progress-bar-success";
-         document.getElementById("neu-right").style.color = "black";
-         document.getElementById("neu-right").style.fontWeight = 600;
-       }
-
-     </script>
+           </script>
 
     <!--  Jquery Core Script -->
     <script src="../static/assets/js/jquery-1.10.2.js"></script>
