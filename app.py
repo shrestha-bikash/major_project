@@ -20,6 +20,8 @@ FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
 
 # initialization
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 300
+
 app.config.update(
     DEBUG = True,
 )
@@ -173,6 +175,14 @@ def privacy():
 def tos():
     return render_template('tos.html')
 
+
+# No cacheing at all for API endpoints.
+@app.after_request
+def add_header(response):
+    # response.cache_control.no_store = True
+    if 'Cache-Control' not in response.headers:
+        response.headers['Cache-Control'] = 'no-store'
+    return response
 
 #----------------------------------------
 # facebook authentication
