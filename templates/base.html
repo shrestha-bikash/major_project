@@ -9,13 +9,12 @@
     <meta property="fb:app_id" content="1317247704956019" />
     <meta property="og:title" content="Predicting Personality traits "/>
     <meta property="og:type" content="user_posts"/>
-    <meta property="og:url" content="http://localhost:5000/"/>
     <meta property="og:site_name" content="my_new_app"/>
     <meta property="og:description" content="How does user posts show the personality?"/>
     <title>Predict Your Personality</title>
 
     <!-- Scripts for word cloud -->
-    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="../static/assets/js/d3.layout.cloud.js"></script>
 
     <!-- BOOTSTRAP CORE STYLE CSS -->
@@ -35,7 +34,7 @@
 
 
     <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
 
@@ -313,6 +312,7 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
          var word_list = [];
          {% if not session.logged_in %}
           var word_list = [];
+
          {% else %}
 
            {% for key, value in session.wordlist.items() %}
@@ -464,7 +464,7 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
 
        }
 
-           </script>
+    </script>
 
     <!--  Jquery Core Script -->
     <script src="../static/assets/js/jquery-1.10.2.js"></script>
