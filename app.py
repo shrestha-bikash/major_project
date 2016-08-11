@@ -267,6 +267,7 @@ def facebook_authorized(resp):
 @app.route("/logout")
 def logout():
     pop_login_session()
+    session.clear()
     return redirect(url_for('index'))
 
 
