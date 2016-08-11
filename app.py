@@ -3,7 +3,6 @@ import json
 import re
 import random
 import operator
-import helper
 import numpy as np
 #from flask.ext.sqlalchemy import SQLAlchemy
 from sklearn import svm
@@ -22,7 +21,7 @@ FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
 # initialization
 app = Flask(__name__)
 
-app.session_interface = helper.RedisSessionInterface()
+
 
 app.config.update(
     DEBUG = True,
