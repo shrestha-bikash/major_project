@@ -192,6 +192,7 @@ def pop_login_session():
 
 @app.route("/facebook_login")
 def facebook_login():
+    session.clear()
     return facebook.authorize(callback=url_for('facebook_authorized',
         next=request.args.get('next'), _external=True))
 
