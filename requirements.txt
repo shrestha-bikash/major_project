@@ -1,5 +1,6 @@
 Django==1.9.6
 gunicorn==17.5
+gevent
 Flask==0.11
 Flask-SQLAlchemy==2.1
 Flask-OAuth==0.12
