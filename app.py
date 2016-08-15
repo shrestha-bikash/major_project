@@ -21,7 +21,7 @@ FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
 # initialization
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = postgres://kgtpnximjmopus:UgzJlMYkK8ko9APT_H-NEuEMFj@ec2-54-243-249-159.compute-1.amazonaws.com:5432/d9f8g9chne1iid
 db = SQLAlchemy(app)
 
 app.config.update(
@@ -31,24 +31,24 @@ app.secret_key = SECRET_KEY
 
 oauth = OAuth()
 
-class users(db.Model):
-   id = db.Column('user_id', db.Integer, primary_key = True)
-   name = db.Column(db.String(100))
-   opn = db.Column(db.Integer)
-   con = db.Column(db.Integer)
-   ext = db.Column(db.Integer)
-   agr = db.Column(db.Integer)
-   neu = db.Column(db.Integer)
-
-
-   def __init__(self,id, name, opn, con, ext, agr, neu):
-        self.id = id
-        self.name = name
-        self.opn = opn
-        self.con = con
-        self.ext = ext
-        self.agr = agr
-        self.neu = neu
+# class users(db.Model):
+#    id = db.Column('user_id', db.Integer, primary_key = True)
+#    name = db.Column(db.String(100))
+#    opn = db.Column(db.Integer)
+#    con = db.Column(db.Integer)
+#    ext = db.Column(db.Integer)
+#    agr = db.Column(db.Integer)
+#    neu = db.Column(db.Integer)
+#
+#
+#    def __init__(self,id, name, opn, con, ext, agr, neu):
+#         self.id = id
+#         self.name = name
+#         self.opn = opn
+#         self.con = con
+#         self.ext = ext
+#         self.agr = agr
+#         self.neu = neu
 
 facebook = oauth.remote_app('facebook',
     base_url='https://graph.facebook.com/',
@@ -265,9 +265,9 @@ def facebook_authorized(resp):
     agr = svm_Model(X, y[3], feature)
     neu = svm_Model(X, y[4], feature)
 
-    new_user = users(user_id, me['name'], int(opn[0]), int(con[0]), int(ext[0]), int(agr[0]),int(neu[0]))
-    db.session.add(new_user)
-    db.session.commit()
+    # new_user = users(user_id, me['name'], int(opn[0]), int(con[0]), int(ext[0]), int(agr[0]),int(neu[0]))
+    # db.session.add(new_user)
+    # db.session.commit()
 
     session['user'] = me['name']
     session['id'] = user_id
