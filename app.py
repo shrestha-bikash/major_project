@@ -31,24 +31,25 @@ app.secret_key = SECRET_KEY
 
 oauth = OAuth()
 
-# class users(db.Model):
-#    id = db.Column('user_id', db.Integer, primary_key = True)
-#    name = db.Column(db.String(100))
-#    opn = db.Column(db.Integer)
-#    con = db.Column(db.Integer)
-#    ext = db.Column(db.Integer)
-#    agr = db.Column(db.Integer)
-#    neu = db.Column(db.Integer)
-#
-#
-#    def __init__(self,id, name, opn, con, ext, agr, neu):
-#         self.id = id
-#         self.name = name
-#         self.opn = opn
-#         self.con = con
-#         self.ext = ext
-#         self.agr = agr
-#         self.neu = neu
+class users(db.Model):
+   id = db.Column(db.Integer, primary_key = True)
+   userID = db.Column(db.Integer)
+   name = db.Column(db.String(100))
+   opn = db.Column(db.Integer)
+   con = db.Column(db.Integer)
+   ext = db.Column(db.Integer)
+   agr = db.Column(db.Integer)
+   neu = db.Column(db.Integer)
+
+
+   def __init__(self,userID, name, opn, con, ext, agr, neu):
+        self.userID = userID
+        self.name = name
+        self.opn = opn
+        self.con = con
+        self.ext = ext
+        self.agr = agr
+        self.neu = neu
 
 facebook = oauth.remote_app('facebook',
     base_url='https://graph.facebook.com/',
@@ -265,9 +266,9 @@ def facebook_authorized(resp):
     agr = svm_Model(X, y[3], feature)
     neu = svm_Model(X, y[4], feature)
 
-    # new_user = users(user_id, me['name'], int(opn[0]), int(con[0]), int(ext[0]), int(agr[0]),int(neu[0]))
-    # db.session.add(new_user)
-    # db.session.commit()
+    new_user = users(user_id, me['name'], int(opn[0]), int(con[0]), int(ext[0]), int(agr[0]),int(neu[0]))
+    db.session.add(new_user)
+    db.session.commit()
 
     session['user'] = me['name']
     session['id'] = user_id
