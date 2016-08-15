@@ -266,7 +266,7 @@ def facebook_authorized(resp):
     neu = svm_Model(X, y[4], feature)
 
     new_user = users(user_id, me['name'], int(opn[0]), int(con[0]), int(ext[0]), int(agr[0]),int(neu[0]))
-    db.session.add(user)
+    db.session.add(new_user)
     db.session.commit()
 
     session['user'] = me['name']
