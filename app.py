@@ -21,7 +21,7 @@ FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
 # initialization
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = postgres://kgtpnximjmopus:UgzJlMYkK8ko9APT_H-NEuEMFj@ec2-54-243-249-159.compute-1.amazonaws.com:5432/d9f8g9chne1iid
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://kgtpnximjmopus:UgzJlMYkK8ko9APT_H-NEuEMFj@ec2-54-243-249-159.compute-1.amazonaws.com:5432/d9f8g9chne1iid'
 db = SQLAlchemy(app)
 
 app.config.update(
