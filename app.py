@@ -4,13 +4,13 @@ import re
 import random
 import operator
 import numpy as np
-#from flask.ext.sqlalchemy import SQLAlchemy
 from sklearn import svm
 from sklearn import decomposition
 from sklearn.multiclass import OneVsRestClassifier
 from flask import Flask, render_template, send_from_directory
 from flask import url_for, request, session, redirect
 from flask_oauth import OAuth
+from flask_sqlalchemy import SQLAlchemy
 
 
 SECRET_KEY = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
@@ -21,7 +21,7 @@ FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
 # initialization
 app = Flask(__name__)
 
-
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
 app.config.update(
     DEBUG = True,
