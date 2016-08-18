@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <meta property="fb:app_id" content="1317247704956019" />
+    <meta property="fb:app_id" content="1309139539100169" />
     <meta property="og:title" content="Predicting Personality traits "/>
     <meta property="og:url" content="https://personalityprediction.herokuapp.com/"/>
-    <meta property="og:type" content="user_posts"/>
+    <meta property="og:type" content="website"/>
     <meta property="og:site_name" content="my_new_app"/>
     <meta property="og:description" content="How does user posts show the personality?"/>
-    <meta property="og:image" content="https://personalityprediction.herokuapp.com/static/assets/img/home.jpg" />
+    <meta property="og:image" content="https://personalityprediction.herokuapp.com/static/assets/img/preview.png" />
     <title>Predict Your Personality</title>
 
     <!-- Scripts for word cloud -->
@@ -472,18 +472,18 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
        }
 
        function share(){
-            
-             html2canvas([document.getElementById('share-img')], {
-                  onrendered: function(canvas) {
-                     var data = canvas.toDataURL('image/png');
-                     // AJAX call to send `data` to a PHP file that creates an image from the dataURI string and saves it to a directory on the server
 
-                     var image = new Image();
-                     image.src = data;
-                     document.getElementById('img-out').appendChild(image);
-                     $("meta[property='og\\:image']").attr("content", image.src);
-                  }
-            });
+         html2canvas([document.getElementById('share-img')], {
+              onrendered: function(canvas) {
+                 var data = canvas.toDataURL('image/png');
+                 // AJAX call to send `data` to a PHP file that creates an image from the dataURI string and saves it to a directory on the server
+
+                 var image = new Image();
+                 image.src = data;
+                //  document.getElementById('img-out').appendChild(image);
+                 $("meta[property='og\\:image']").attr("content", image.src);
+              }
+        });
 
        }
 
