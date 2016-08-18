@@ -275,7 +275,7 @@ def facebook_authorized(resp):
     session['user'] = me['name']
     session['id'] = user_id
     session['url'] = photo_url
-    session['wordlist'] = usermap
+    
     session['wordCount'] = len(usermap)
 
     session['opn'] = int(opn[0])*100/5
