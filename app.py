@@ -302,16 +302,7 @@ def facebook_authorized(resp):
     session['agr_score'] = int(agr[0])
     session['neu_score'] = int(neu[0])
 
-    check_user = Users.query.all()
-
-    if not check_user:
-        new_user = Users(str(user_id), me['name'], int(opn[0]), int(con[0]), int(ext[0]), int(agr[0]), int(neu[0]), int(len(usermap)), str(usermap))
-        db.session.add(new_user)
-        db.session.commit()
-    else:
-        return redirect(url_for('result_sec', userid=str(user_id)))
-
-    return redirect(url_for('result_sec', userid=str(user_id)))
+    return redirect(next_url)
 
 @app.route("/logout")
 def logout():
