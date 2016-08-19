@@ -21,7 +21,7 @@ FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
 # initialization
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://kgtpnximjmopus:UgzJlMYkK8ko9APT_H-NEuEMFj@ec2-54-243-249-159.compute-1.amazonaws.com:5432/d9f8g9chne1iid'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://dtspyortohlevx:R4sLteXpCGMY1WdZ3KORtnIylP@ec2-54-243-190-37.compute-1.amazonaws.com:5432/d72udbjagl2df0'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.config.update(
@@ -191,7 +191,6 @@ def index():
 
 @app.route("/<userid>")
 def result_sec(userid):
-    print userid
     myUser = Users.query.filter_by(userID=userid).first()
     return render_template('index.html', myUser=myUser, wordlist=eval(myUser.wordList))
 
@@ -303,7 +302,16 @@ def facebook_authorized(resp):
     session['agr_score'] = int(agr[0])
     session['neu_score'] = int(neu[0])
 
-    return redirect(next_url)
+    check_user = Users.query.all()
+
+    if not check_user:
+        new_user = Users(str(user_id), me['name'], int(opn[0]), int(con[0]), int(ext[0]), int(agr[0]), int(neu[0]), int(len(usermap)), str(usermap))
+        db.session.add(new_user)
+        db.session.commit()
+    else:
+        return redirect(url_for('result_sec', userid=str(user_id)))
+
+    return redirect(url_for('result_sec', userid=str(user_id)))
 
 @app.route("/logout")
 def logout():
