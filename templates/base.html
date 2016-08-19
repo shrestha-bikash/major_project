@@ -45,15 +45,7 @@
 
 
   <body>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1309139539100169";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
+
     {% block navbar %}
 
 
@@ -471,21 +463,7 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
 
        }
 
-       function share(){
-
-         html2canvas([document.getElementById('share-img')], {
-              onrendered: function(canvas) {
-                 var data = canvas.toDataURL('image/png');
-                 // AJAX call to send `data` to a PHP file that creates an image from the dataURI string and saves it to a directory on the server
-
-                 var image = new Image();
-                 image.src = data;
-                //  document.getElementById('img-out').appendChild(image);
-                 $("meta[property='og\\:image']").attr("content", image.src);
-              }
-        });
-
-       }
+       
 
 
 

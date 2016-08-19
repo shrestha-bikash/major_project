@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta property="fb:app_id" content="1309139539100169" />
+    <meta property="og:title" content="Predicting Personality traits "/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://personalityprediction.herokuapp.com/"/>
+    <meta property="og:site_name" content="my_new_app"/>
+    <meta property="og:description" content="How does user posts show the personality?"/>
+    <title>Predict Your Personality</title>
+    <!-- BOOTSTRAP CORE STYLE CSS -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap-social.css') }}">
+    <!-- FONT AWESOME CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css') }}">
+
+
+         <!-- FLEXSLIDER CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flexslider.css') }}">
+
+
+        <!-- CUSTOM STYLE CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico') }}">
+
+
+  </head>
+
+
+  <body>
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1309139539100169";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+      <!--Navbar section started -->
+   <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
+          <div class="container">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/"><p class="logo-custom">PersonalityPredict</p></a>
+              </div>
+
+          </div>
+      </div>
+        <!--NAVBAR SECTION END-->
+  <div class='home'>
+    <div class="container">
+      <div id="img-out" >
+
+      </div>
+      <br>
+      <p>Share this result on facebook</p>
+
+      <div id="share_button" class="fb-share-button"
+    		data-href="http://personalityprediction.herokuapp.com/share.html"
+    		data-layout="button_count">
+  	  </div>
+      <br>
+    </div>
+     <!-- <p>Share this result on facebook</p>
+    <button onclick="share()" id ="share_button" class="fb-share-button" data-href="http://personalityprediction.herokuapp.com/share.html" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpersonalityprediction.herokuapp.com%2F%23_%3D_&amp;src=sdkpreparse">Share</a></button> -->
+    <br>
+  </div>
+
+
+    <div id="footer">
+      <a href="/privacy">Privacy Policy </a>
+      <a href="/tos"> Terms of Services</a>
+      <p>Developed by : Bikash, Bishal, Kiran and Manil</p>
+    </div>
+     <!-- FOOTER SECTION END-->
+
+    <!--  Jquery Core Script -->
+    <script src="../static/assets/js/jquery-1.10.2.js"></script>
+    <!--  Core Bootstrap Script -->
+    <script src="../static/assets/js/bootstrap.js"></script>
+    <!--  Flexslider Scripts -->
+         <script src="../static/assets/js/jquery.flexslider.js"></script>
+     <!--  Scrolling Reveal Script -->
+    <script src="../static/assets/js/scrollReveal.js"></script>
+    <!--  Scroll Scripts -->
+    <script src="../static/assets/js/jquery.easing.min.js"></script>
+    <!--  Custom Scripts -->
+    <script src="../static/assets/js/custom.js"></script>
+
+
+
+  </body>
+</html>

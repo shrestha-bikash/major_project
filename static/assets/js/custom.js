@@ -7,7 +7,7 @@
 
     100% Free To use For Personal And Commercial Use.
     IN EXCHANGE JUST GIVE US CREDITS AND TELL YOUR FRIENDS ABOUT US
-   
+
     ========================================================  */
 
 (function ($) {
@@ -16,17 +16,17 @@
         scrollAnimation_fun: function () {
 
             /*====================================
-             ON SCROLL ANIMATION SCRIPTS 
+             ON SCROLL ANIMATION SCRIPTS
             ======================================*/
-           
-            
+
+
             window.scrollReveal = new scrollReveal();
 
         },
          scroll_fun: function () {
 
             /*====================================
-                 EASING PLUGIN SCRIPTS 
+                 EASING PLUGIN SCRIPTS
                 ======================================*/
             $(function () {
                 $('.move-me a').bind('click', function (event) { //just pass move-me in design and start scrolling
@@ -43,7 +43,7 @@
          top_flex_slider_fun:function()
          {
              /*====================================
-              FLEX SLIDER SCRIPTS 
+              FLEX SLIDER SCRIPTS
              ======================================*/
              $('#main-section').flexslider({
                  animation: "fade", //String: Select your animation type, "fade" or "slide"
@@ -53,21 +53,21 @@
 
              });
          },
-      
+
         custom_fun:function()
         {
             /*====================================
              WRITE YOUR   SCRIPTS  BELOW
             ======================================*/
-
+            
 
 
 
         },
 
     }
-   
-   
+
+
     $(document).ready(function () {
         mainApp.scrollAnimation_fun();
         mainApp.scroll_fun();
@@ -75,5 +75,3 @@
         mainApp.custom_fun();
     });
 }(jQuery));
-
-
