@@ -285,25 +285,25 @@ def facebook_authorized(resp):
     agr = svm_Model(X, y[3], feature)
     neu = svm_Model(X, y[4], feature)
 
-    session['user'] = me['name']
-    session['id'] = user_id
+    # session['user'] = me['name']
+    # session['id'] = user_id
     session['url'] = photo_url
 
-    session['wordCount'] = len(usermap)
+    # session['wordCount'] = len(usermap)
 
-    session['opn'] = int(opn[0])*100/5
-    session['con'] = int(con[0])*100/5
-    session['ext'] = int(ext[0])*100/5
-    session['agr'] = int(agr[0])*100/5
-    session['neu'] = int(neu[0])*100/5
+    # session['opn'] = int(opn[0])*100/5
+    # session['con'] = int(con[0])*100/5
+    # session['ext'] = int(ext[0])*100/5
+    # session['agr'] = int(agr[0])*100/5
+    # session['neu'] = int(neu[0])*100/5
+    #
+    # session['opn_score'] = int(opn[0])
+    # session['con_score'] = int(con[0])
+    # session['ext_score'] = int(ext[0])
+    # session['agr_score'] = int(agr[0])
+    # session['neu_score'] = int(neu[0])
 
-    session['opn_score'] = int(opn[0])
-    session['con_score'] = int(con[0])
-    session['ext_score'] = int(ext[0])
-    session['agr_score'] = int(agr[0])
-    session['neu_score'] = int(neu[0])
-
-    check_user = Users.query.all()
+    check_user = Users.query.filter_by(userID=str(user_id)).first()
 
     if not check_user:
         new_user = Users(str(user_id), me['name'], int(opn[0]), int(con[0]), int(ext[0]), int(agr[0]), int(neu[0]), int(len(usermap)), str(usermap))
