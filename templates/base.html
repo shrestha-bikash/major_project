@@ -317,137 +317,141 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
           var word_list = [];
 
          {% else %}
-
+           {% for key,value in wordlist.items() %}
+             var temp = {};
+             temp['text'] = '{{key}}';
+             temp['size'] = {{value}}*20;
+             word_list.push(temp);
+           {% endfor %}
 
 
            //  for making the trait label shown and hidden plus progress bar changing the color
-            if ({{ session['opn_score'] }}<3){
+           if ({{ myUser.opn }}<3){
 
-              document.getElementById("opn").className = "progress-bar progress-bar-warning";
-              document.getElementById("opn-left").style.color = "black";
-              document.getElementById("opn-left").style.fontWeight = 600;
+             document.getElementById("opn").className = "progress-bar progress-bar-warning";
+             document.getElementById("opn-left").style.color = "black";
+             document.getElementById("opn-left").style.fontWeight = 600;
 
-            }
-            else if ({{ session['opn_score'] }}<2) {
-              document.getElementById("opn").className = "progress-bar progress-bar-danger";
+           }
+           else if ({{ myUser.opn }}<2) {
+             document.getElementById("opn").className = "progress-bar progress-bar-danger";
 
-            }
-            else{
+           }
+           else{
 
-              document.getElementById("opn").className = "progress-bar progress-bar-success";
-              document.getElementById("opn-right").style.color = "black";
-              document.getElementById("opn-right").style.fontWeight = 600;
+             document.getElementById("opn").className = "progress-bar progress-bar-success";
+             document.getElementById("opn-right").style.color = "black";
+             document.getElementById("opn-right").style.fontWeight = 600;
 
-            }
-
-
-            if ({{ session['con_score'] }}<3){
-              document.getElementById("con").className = "progress-bar progress-bar-warning";
-              document.getElementById("con-left").style.color = "black";
-              document.getElementById("con-left").style.fontWeight = 600;
-
-            }
-            else if ({{ session['con_score'] }}<2) {
-              document.getElementById("con").className = "progress-bar progress-bar-danger";
-
-            }
-            else{
-              document.getElementById("con").className = "progress-bar progress-bar-success";
-              document.getElementById("con-right").style.color = "black";
-              document.getElementById("con-right").style.fontWeight = 600;
-
-            }
+           }
 
 
-            if ({{ session['ext_score'] }}<3){
-              document.getElementById("ext").className = "progress-bar progress-bar-warning";
-              document.getElementById("ext-left").style.color = "black";
-              document.getElementById("ext-left").style.fontWeight = 600;
+           if ({{ myUser.con }}<3){
+             document.getElementById("con").className = "progress-bar progress-bar-warning";
+             document.getElementById("con-left").style.color = "black";
+             document.getElementById("con-left").style.fontWeight = 600;
 
-            }
-            else if ({{ session['agr_score'] }}<2) {
-              document.getElementById("agr").className = "progress-bar progress-bar-danger";
+           }
+           else if ({{ myUser.con }}<2) {
+             document.getElementById("con").className = "progress-bar progress-bar-danger";
 
-            }
-            else{
-              document.getElementById("ext").className = "progress-bar progress-bar-success";
-              document.getElementById("ext-right").style.color = "black";
-              document.getElementById("ext-right").style.fontWeight = 600;
+           }
+           else{
+             document.getElementById("con").className = "progress-bar progress-bar-success";
+             document.getElementById("con-right").style.color = "black";
+             document.getElementById("con-right").style.fontWeight = 600;
 
-            }
-
-
-            if ({{ session['agr_score'] }}<3){
-              document.getElementById("agr").className = "progress-bar progress-bar-warning";
-              document.getElementById("agr-left").style.color = "black";
-              document.getElementById("agr-left").style.fontWeight = 600;
-            }
-            else if ({{ session['agr_score'] }}<2) {
-              document.getElementById("agr").className = "progress-bar progress-bar-danger";
-
-            }
-            else{
-              document.getElementById("agr").className = "progress-bar progress-bar-success";
-              document.getElementById("agr-right").style.color = "black";
-              document.getElementById("agr-right").style.fontWeight = 600;
-
-            }
+           }
 
 
-            if ({{ session['neu_score'] }}<3){
-              document.getElementById("neu").className = "progress-bar progress-bar-warning";
-              document.getElementById("neu-left").style.color = "black";
-              document.getElementById("neu-left").style.fontWeight = 600;
+           if ({{ myUser.ext }}<3){
+             document.getElementById("ext").className = "progress-bar progress-bar-warning";
+             document.getElementById("ext-left").style.color = "black";
+             document.getElementById("ext-left").style.fontWeight = 600;
 
-            }
-            else if ({{ session['neu_score'] }}<2) {
-              document.getElementById("neu").className = "progress-bar progress-bar-danger";
+           }
+           else if ({{ myUser.ext }}<2) {
+             document.getElementById("agr").className = "progress-bar progress-bar-danger";
 
-            }
-            else{
-              document.getElementById("neu").className = "progress-bar progress-bar-success";
-              document.getElementById("neu-right").style.color = "black";
-              document.getElementById("neu-right").style.fontWeight = 600;
-            }
+           }
+           else{
+             document.getElementById("ext").className = "progress-bar progress-bar-success";
+             document.getElementById("ext-right").style.color = "black";
+             document.getElementById("ext-right").style.fontWeight = 600;
 
+           }
+
+
+           if ({{ myUser.agr }}<3){
+             document.getElementById("agr").className = "progress-bar progress-bar-warning";
+             document.getElementById("agr-left").style.color = "black";
+             document.getElementById("agr-left").style.fontWeight = 600;
+           }
+           else if ({{ myUser.agr }}<2) {
+             document.getElementById("agr").className = "progress-bar progress-bar-danger";
+
+           }
+           else{
+             document.getElementById("agr").className = "progress-bar progress-bar-success";
+             document.getElementById("agr-right").style.color = "black";
+             document.getElementById("agr-right").style.fontWeight = 600;
+
+           }
+
+
+           if ({{ myUser.neu }}<3){
+             document.getElementById("neu").className = "progress-bar progress-bar-warning";
+             document.getElementById("neu-left").style.color = "black";
+             document.getElementById("neu-left").style.fontWeight = 600;
+
+           }
+           else if ({{ myUser.neu }}<2) {
+             document.getElementById("neu").className = "progress-bar progress-bar-danger";
+
+           }
+           else{
+             document.getElementById("neu").className = "progress-bar progress-bar-success";
+             document.getElementById("neu-right").style.color = "black";
+             document.getElementById("neu-right").style.fontWeight = 600;
+           }
 
 
          {% endif %}
 
-        //  var color = d3.scale.linear()
-        //         .domain([0,5,10,20,30,40,50,60])
-        //
-        // var fill = d3.scale.category20();
-        //
-        //    d3.layout.cloud().size([800, 500])
-        //            .words(word_list)
-        //            .padding(1)
-        //            .rotate(0)
-        //            .fontSize(function(d) { return d.size; })
-        //            .on("end", draw)
-        //            .start();
-        //
-        //    function draw(words) {
-        //        d3.select(".wcloud").append("svg")
-        //                .attr("width", 800)
-        //                .attr("height", 500)
-        //                .attr("class", "wordcloud")
-        //                .append("g")
-        //                // without the transform, words words would get cutoff to the left and top, they would
-        //                // appear outside of the SVG area
-        //                .attr("transform", "translate(400,250)")
-        //                .selectAll("text")
-        //                .data(words)
-        //                .enter().append("text")
-        //                .style("font-size", function(d) { return d.size + "px"; })
-        //                .style("fill", function(d, i) { return fill(i); })
-        //                .style("font-family", "helvetica")
-        //                .attr("text-anchor", "middle")
-        //                .attr("transform", function(d) {
-        //                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-        //                })
-        //                .text(function(d) { return d.text; });
-        //    }
+         var color = d3.scale.linear()
+                .domain([0,5,10,20,30,40,50,60])
+
+        var fill = d3.scale.category20();
+
+           d3.layout.cloud().size([800, 500])
+                   .words(word_list)
+                   .padding(1)
+                   .rotate(0)
+                   .fontSize(function(d) { return d.size; })
+                   .on("end", draw)
+                   .start();
+
+           function draw(words) {
+               d3.select(".wcloud").append("svg")
+                       .attr("width", 800)
+                       .attr("height", 500)
+                       .attr("class", "wordcloud")
+                       .append("g")
+                       // without the transform, words words would get cutoff to the left and top, they would
+                       // appear outside of the SVG area
+                       .attr("transform", "translate(400,250)")
+                       .selectAll("text")
+                       .data(words)
+                       .enter().append("text")
+                       .style("font-size", function(d) { return d.size + "px"; })
+                       .style("fill", function(d, i) { return fill(i); })
+                       .style("font-family", "helvetica")
+                       .attr("text-anchor", "middle")
+                       .attr("transform", function(d) {
+                           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                       })
+                       .text(function(d) { return d.text; });
+           }
 
 
        function myFunction() {
@@ -463,7 +467,7 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
 
        }
 
-       
+
 
 
 
