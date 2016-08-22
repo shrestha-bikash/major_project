@@ -174,16 +174,19 @@ def getStatus(inpstatus):
                 usermap[word] = count
 
 
-    maxcount = {}
-    for i in usermap:
-        if i not in maxcount:
-            maxcount[i] = 0
-        maxcount[i] = max(maxcount[i], usermap[i])
+    if (len(usermap)<10):
+        feature = [0]
+        return feature
 
+    else:
+        maxcount = {}
+        for i in usermap:
+            if i not in maxcount:
+                maxcount[i] = 0
+            maxcount[i] = max(maxcount[i], usermap[i])
 
-
-    feature = [.5 + .5 * usermap[j] / (0 if j not in maxcount else maxcount[j])  if j in usermap else 0 for j in totalbagofwords]
-    return feature
+        feature = [.5 + .5 * usermap[j] / (0 if j not in maxcount else maxcount[j])  if j in usermap else 0 for j in totalbagofwords]
+        return feature
 
 # controllers
 @app.route("/")
@@ -279,29 +282,16 @@ def facebook_authorized(resp):
     feature = getStatus(posts)
     #testpca = decomposition.PCA(n_components = 10).fit(feature)
     #Xt = testpca.transform(feature)
-    opn = svm_Model(X, y[0], feature)
-    con = svm_Model(X, y[1], feature)
-    ext = svm_Model(X, y[2], feature)
-    agr = svm_Model(X, y[3], feature)
-    neu = svm_Model(X, y[4], feature)
+    if len(feature) < 2:
+        opn=con=ext=agr=neu=[1,0]
+    else:
+        opn = svm_Model(X, y[0], feature)
+        con = svm_Model(X, y[1], feature)
+        ext = svm_Model(X, y[2], feature)
+        agr = svm_Model(X, y[3], feature)
+        neu = svm_Model(X, y[4], feature)
 
-    # session['user'] = me['name']
-    # session['id'] = user_id
     session['url'] = photo_url
-
-    # session['wordCount'] = len(usermap)
-
-    # session['opn'] = int(opn[0])*100/5
-    # session['con'] = int(con[0])*100/5
-    # session['ext'] = int(ext[0])*100/5
-    # session['agr'] = int(agr[0])*100/5
-    # session['neu'] = int(neu[0])*100/5
-    #
-    # session['opn_score'] = int(opn[0])
-    # session['con_score'] = int(con[0])
-    # session['ext_score'] = int(ext[0])
-    # session['agr_score'] = int(agr[0])
-    # session['neu_score'] = int(neu[0])
 
     check_user = Users.query.filter_by(userID=str(user_id)).first()
 
@@ -309,10 +299,18 @@ def facebook_authorized(resp):
         new_user = Users(str(user_id), me['name'], int(opn[0]), int(con[0]), int(ext[0]), int(agr[0]), int(neu[0]), int(len(usermap)), str(usermap))
         db.session.add(new_user)
         db.session.commit()
+        return redirect(url_for('result_sec', userid=str(user_id)))
     else:
+        check_user.opn = int(opn[0])
+        check_user.con = int(con[0])
+        check_user.ext = int(ext[0])
+        check_user.agr = int(agr[0])
+        check_user.neu = int(neu[0])
+        check_user.wordCount = int(len(usermap))
+        check_user.wordList = str(usermap)
+        db.session.commit()
         return redirect(url_for('result_sec', userid=str(user_id)))
 
-    return redirect(url_for('result_sec', userid=str(user_id)))
 
 @app.route("/logout")
 def logout():
