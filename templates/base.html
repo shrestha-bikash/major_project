@@ -464,10 +464,32 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
        function showPage(){
          document.getElementById("demo").style.display = "none";
          document.getElementById("result").style.display = "block";
+         showImg();
+       }
+       function showImg(){
+
+             html2canvas($("#score"), {
+                 onrendered: function(canvas) {
+                     var data = canvas.toDataURL('image/png');
+
+                     var image = new Image();
+                     image.src = data;
+                     document.getElementById('resultImg').appendChild(image);
+
+                   }
+             });
+             myvar = setTimeout(hidePage, 500);
+
 
        }
+       function hidePage(){
+          document.getElementById("score").style.display = "none";
 
-
+       }
+       function fbshareCurrentPage()
+       {window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(window.location.href)+"&t="+document.title, '',
+       'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+       return false; }
 
 
 
