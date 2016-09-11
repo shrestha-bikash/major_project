@@ -21,9 +21,9 @@ FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
 # initialization
 app = Flask(__name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dtspyortohlevx:R4sLteXpCGMY1WdZ3KORtnIylP@ec2-54-243-190-37.compute-1.amazonaws.com:5432/d72udbjagl2df0'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dtspyortohlevx:R4sLteXpCGMY1WdZ3KORtnIylP@ec2-54-243-190-37.compute-1.amazonaws.com:5432/d72udbjagl2df0'
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://bikash:asdf@localhost/userData'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://bikash:asdf@localhost/userData'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
