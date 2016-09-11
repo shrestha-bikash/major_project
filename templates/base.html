@@ -12,7 +12,7 @@
     <meta property="og:type" content="website"/>
     <meta property="og:site_name" content="my_new_app"/>
     <meta property="og:description" content="How does user posts show the personality?"/>
-    
+
     <title>Predict Your Personality</title>
 
     <!-- Scripts for word cloud -->
@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap-social.css') }}">
     <!-- FONT AWESOME CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css') }}">
-
 
          <!-- FLEXSLIDER CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flexslider.css') }}">
@@ -45,6 +44,7 @@
 
 
   <body>
+    <div id="fb-root"></div>
 
     {% block navbar %}
 
@@ -311,7 +311,6 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
      <script type="text/javascript">
 
 
-         //var frequency_list = [{"text":"study","size":40},{"text":"motion","size":15},{"text":"forces","size":10},{"text":"electricity","size":15},{"text":"movement","size":10},{"text":"relation","size":5},{"text":"things","size":10},{"text":"force","size":5},{"text":"ad","size":5},{"text":"energy","size":85},{"text":"living","size":5},{"text":"nonliving","size":5},{"text":"laws","size":15},{"text":"speed","size":45},{"text":"velocity","size":30},{"text":"define","size":5},{"text":"constraints","size":5},{"text":"universe","size":10},{"text":"physics","size":120},{"text":"describing","size":5},{"text":"matter","size":90},{"text":"physics-the","size":5},{"text":"world","size":10},{"text":"works","size":10},{"text":"science","size":70},{"text":"interactions","size":30},{"text":"studies","size":5},{"text":"properties","size":45},{"text":"nature","size":40},{"text":"branch","size":30},{"text":"concerned","size":25},{"text":"source","size":40},{"text":"google","size":10},{"text":"defintions","size":5},{"text":"two","size":15},{"text":"grouped","size":15},{"text":"traditional","size":15},{"text":"fields","size":15},{"text":"acoustics","size":15},{"text":"optics","size":15},{"text":"mechanics","size":20},{"text":"thermodynamics","size":15},{"text":"electromagnetism","size":15},{"text":"modern","size":15},{"text":"extensions","size":15},{"text":"thefreedictionary","size":15},{"text":"interaction","size":15},{"text":"org","size":25},{"text":"answers","size":5},{"text":"natural","size":15},{"text":"objects","size":5},{"text":"treats","size":10},{"text":"acting","size":5},{"text":"department","size":5},{"text":"gravitation","size":5},{"text":"heat","size":10},{"text":"light","size":10},{"text":"magnetism","size":10},{"text":"modify","size":5},{"text":"general","size":10},{"text":"bodies","size":5},{"text":"philosophy","size":5},{"text":"brainyquote","size":5},{"text":"words","size":5},{"text":"ph","size":5},{"text":"html","size":5},{"text":"lrl","size":5},{"text":"zgzmeylfwuy","size":5},{"text":"subject","size":5},{"text":"distinguished","size":5},{"text":"chemistry","size":5},{"text":"biology","size":5},{"text":"includes","size":5},{"text":"radiation","size":5},{"text":"sound","size":5},{"text":"structure","size":5},{"text":"atoms","size":5},{"text":"including","size":10},{"text":"atomic","size":10},{"text":"nuclear","size":10},{"text":"cryogenics","size":10},{"text":"solid-state","size":10},{"text":"particle","size":10},{"text":"plasma","size":10},{"text":"deals","size":5},{"text":"merriam-webster","size":5},{"text":"dictionary","size":10},{"text":"analysis","size":5},{"text":"conducted","size":5},{"text":"order","size":5},{"text":"understand","size":5},{"text":"behaves","size":5},{"text":"en","size":5},{"text":"wikipedia","size":5},{"text":"wiki","size":5},{"text":"physics-","size":5},{"text":"physical","size":5},{"text":"behaviour","size":5},{"text":"collinsdictionary","size":5},{"text":"english","size":5},{"text":"time","size":35},{"text":"distance","size":35},{"text":"wheels","size":5},{"text":"revelations","size":5},{"text":"minute","size":5},{"text":"acceleration","size":20},{"text":"torque","size":5},{"text":"wheel","size":5},{"text":"rotations","size":5},{"text":"resistance","size":5},{"text":"momentum","size":5},{"text":"measure","size":10},{"text":"direction","size":10},{"text":"car","size":5},{"text":"add","size":5},{"text":"traveled","size":5},{"text":"weight","size":5},{"text":"electrical","size":5},{"text":"power","size":5}];
          var word_list = [];
          {% if not session.logged_in %}
           var word_list = [];
@@ -326,16 +325,17 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
 
 
            //  for making the trait label shown and hidden plus progress bar changing the color
-           if ({{ myUser.opn }}<3){
+           if ({{ myUser.opn }}<2){
 
-             document.getElementById("opn").className = "progress-bar progress-bar-warning";
+             document.getElementById("opn").className = "progress-bar progress-bar-danger";
              document.getElementById("opn-left").style.color = "black";
              document.getElementById("opn-left").style.fontWeight = 600;
 
            }
-           else if ({{ myUser.opn }}<2) {
-             document.getElementById("opn").className = "progress-bar progress-bar-danger";
-
+           else if ({{ myUser.opn }}<3) {
+             document.getElementById("opn").className = "progress-bar progress-bar-warning";
+             document.getElementById("opn-left").style.color = "black";
+             document.getElementById("opn-left").style.fontWeight = 600;
            }
            else{
 
@@ -346,15 +346,16 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
            }
 
 
-           if ({{ myUser.con }}<3){
-             document.getElementById("con").className = "progress-bar progress-bar-warning";
+           if ({{ myUser.con }}<2){
+             document.getElementById("con").className = "progress-bar progress-bar-danger";
              document.getElementById("con-left").style.color = "black";
              document.getElementById("con-left").style.fontWeight = 600;
 
            }
-           else if ({{ myUser.con }}<2) {
-             document.getElementById("con").className = "progress-bar progress-bar-danger";
-
+           else if ({{ myUser.con }}<3) {
+             document.getElementById("con").className = "progress-bar progress-bar-warning";
+             document.getElementById("con-left").style.color = "black";
+             document.getElementById("con-left").style.fontWeight = 600;
            }
            else{
              document.getElementById("con").className = "progress-bar progress-bar-success";
@@ -364,15 +365,16 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
            }
 
 
-           if ({{ myUser.ext }}<3){
-             document.getElementById("ext").className = "progress-bar progress-bar-warning";
+           if ({{ myUser.ext }}<2){
+             document.getElementById("ext").className = "progress-bar progress-bar-danger";
              document.getElementById("ext-left").style.color = "black";
              document.getElementById("ext-left").style.fontWeight = 600;
 
            }
-           else if ({{ myUser.ext }}<2) {
-             document.getElementById("agr").className = "progress-bar progress-bar-danger";
-
+           else if ({{ myUser.ext }}<3) {
+             document.getElementById("ext").className = "progress-bar progress-bar-warning";
+             document.getElementById("ext-left").style.color = "black";
+             document.getElementById("ext-left").style.fontWeight = 600;
            }
            else{
              document.getElementById("ext").className = "progress-bar progress-bar-success";
@@ -381,16 +383,17 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
 
            }
 
-
-           if ({{ myUser.agr }}<3){
+           if ({{ myUser.agr }}<2) {
+             document.getElementById("agr").className = "progress-bar progress-bar-danger";
+             document.getElementById("agr-left").style.color = "black";
+             document.getElementById("agr-left").style.fontWeight = 600;
+           }
+           else if ({{ myUser.agr }}<3){
              document.getElementById("agr").className = "progress-bar progress-bar-warning";
              document.getElementById("agr-left").style.color = "black";
              document.getElementById("agr-left").style.fontWeight = 600;
            }
-           else if ({{ myUser.agr }}<2) {
-             document.getElementById("agr").className = "progress-bar progress-bar-danger";
 
-           }
            else{
              document.getElementById("agr").className = "progress-bar progress-bar-success";
              document.getElementById("agr-right").style.color = "black";
@@ -398,17 +401,18 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
 
            }
 
-
-           if ({{ myUser.neu }}<3){
+           if ({{ myUser.neu }}<2) {
+             document.getElementById("neu").className = "progress-bar progress-bar-danger";
+             document.getElementById("neu-left").style.color = "black";
+             document.getElementById("neu-left").style.fontWeight = 600;
+           }
+           else if ({{ myUser.neu }}<3){
              document.getElementById("neu").className = "progress-bar progress-bar-warning";
              document.getElementById("neu-left").style.color = "black";
              document.getElementById("neu-left").style.fontWeight = 600;
 
            }
-           else if ({{ myUser.neu }}<2) {
-             document.getElementById("neu").className = "progress-bar progress-bar-danger";
 
-           }
            else{
              document.getElementById("neu").className = "progress-bar progress-bar-success";
              document.getElementById("neu-right").style.color = "black";
@@ -464,32 +468,9 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
        function showPage(){
          document.getElementById("demo").style.display = "none";
          document.getElementById("result").style.display = "block";
-         showImg();
-       }
-       function showImg(){
-
-             html2canvas($("#score"), {
-                 onrendered: function(canvas) {
-                     var data = canvas.toDataURL('image/png');
-
-                     var image = new Image();
-                     image.src = data;
-                     document.getElementById('resultImg').appendChild(image);
-
-                   }
-             });
-             myvar = setTimeout(hidePage, 500);
-
 
        }
-       function hidePage(){
-          document.getElementById("score").style.display = "none";
 
-       }
-       function fbshareCurrentPage()
-       {window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(window.location.href)+"&t="+document.title, '',
-       'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-       return false; }
 
 
 
@@ -507,7 +488,12 @@ experience stress and nervousness, while people scoring low on Neuroticism tend 
     <script src="../static/assets/js/jquery.easing.min.js"></script>
     <!--  Custom Scripts -->
     <script src="../static/assets/js/custom.js"></script>
+    <!-- baseb4binary.js -->
+    <script src="../static/assets/js/base64binary.js"></script>
+    <!-- custom script for sharing -->
+    <script src="../static/assets/js/script.js"></script>
     <script src="http://html2canvas.hertzen.com/build/html2canvas.js"></script>
+    <script type="text/javascript" src="http://canvg.github.io/canvg/canvg.js"></script> 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
 
 

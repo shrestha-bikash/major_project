@@ -15,20 +15,20 @@
         <i class="fa fa-refresh fa-spin fa-4x fa-fw"></i>
         <span class="sr-only">Loading...</span>
       </div>
-
+<!-- showing the personality traits score result here -->
       <div id="result" style="display:none;" class="animate-bottom">
 
-        <div id="score" class="row">
+        <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10" >
-                <div class="well well-sm" style="padding-top:15px;">
+                <div id="score" class="well well-sm" style="padding-top:15px;">
                     <div class="row">
                       <div class="col-xs-12 col-md-12" >
 
 
                               <div class ="row rating-desc" style="padding:5px;">
-                                <div class="col-xs-2 col-md-2 text-left trait-size-big">Openness:</div>
-                                <div class="col-xs-10 col-md-10">
+                                <div class="col-xs-12 col-md-2 text-left trait-size-big">Openness:</div>
+                                <div class="col-xs-12 col-md-10">
                                     <div class="progress">
                                         <div id="opn" class="progress-bar" role="progressbar" aria-valuenow="20"
                                             aria-valuemin="0" aria-valuemax="100" style="width: calc({{ myUser.opn }} * 20%)"> &nbsp;{{ myUser.opn }} </div>
@@ -46,8 +46,8 @@
                                 </div>
                               </div>
                               <div class ="row rating-desc" style="padding:5px;">
-                                <div class="col-xs-2 col-md-2 text-left trait-size-big">Conscientiousness:</div>
-                                <div class="col-xs-10 col-md-10">
+                                <div class="col-xs-12 col-md-2 text-left trait-size-big">Conscientiousness:</div>
+                                <div class="col-xs-12 col-md-10">
                                     <div class="progress">
                                         <div id="con" class="progress-bar" role="progressbar" aria-valuenow="20"
                                             aria-valuemin="0" aria-valuemax="100" style="width: calc({{ myUser.con }} * 20%)"> &nbsp;{{ myUser.con }} </div>
@@ -68,8 +68,8 @@
                                 </div>
                               </div>
                               <div class ="row rating-desc" style="padding:5px;">
-                                <div class="col-xs-2 col-md-2 text-left trait-size-big">Extroversion:</div>
-                                <div class="col-xs-10 col-md-10">
+                                <div class="col-xs-12 col-md-2 text-left trait-size-big">Extroversion:</div>
+                                <div class="col-xs-12 col-md-10">
                                     <div class="progress">
                                         <div id="ext" class="progress-bar" role="progressbar" aria-valuenow="20"
                                             aria-valuemin="0" aria-valuemax="100" style="width: calc({{ myUser.ext }} * 20%)"> &nbsp;{{ myUser.ext }} </div>
@@ -85,13 +85,13 @@
 
                                       </div>
 
-                                    </div>
+                                    </div>  <!-- end row -->
 
                                 </div>
                               </div>
                               <div class ="row rating-desc" style="padding:5px;">
-                                <div class="col-xs-2 col-md-2 text-left trait-size-big">Agreeableness:</div>
-                                <div class="col-xs-10 col-md-10">
+                                <div class="col-xs-12 col-md-2 text-left trait-size-big">Agreeableness:</div>
+                                <div class="col-xs-12 col-md-10">
                                     <div class="progress">
                                         <div id="agr" class="progress-bar" role="progressbar" aria-valuenow="20"
                                             aria-valuemin="0" aria-valuemax="100" style="width: calc({{ myUser.agr }} * 20%)"> &nbsp;{{ myUser.agr }} </div>
@@ -107,13 +107,13 @@
 
                                       </div>
 
-                                    </div>
+                                    </div>  <!-- end row -->
 
                                 </div>
                               </div>
                               <div class ="row rating-desc" style="padding:5px;">
-                                <div class="col-xs-2 col-md-2 text-left trait-size-big">Neuroticism:</div>
-                                <div class="col-xs-10 col-md-10">
+                                <div class="col-xs-12 col-md-2 text-left trait-size-big">Neuroticism:</div>
+                                <div class="col-xs-12 col-md-10">
                                     <div class="progress">
                                         <div id="neu" class="progress-bar" role="progressbar" aria-valuenow="20"
                                             aria-valuemin="0" aria-valuemax="100" style="width: calc({{ myUser.neu }} * 20%)"> &nbsp;{{ myUser.neu }} </div>
@@ -126,33 +126,39 @@
                                         <p id="neu-right" class="trait-size"> Tense, Anxious, Nervous, Worried </p>
                                       </div>
 
-                                    </div>
+                                    </div>  <!-- end row -->
 
                                 </div>
                               </div>
 
-                          <!-- end row -->
+
                       </div>
 
 
-                    </div>
+                    </div>  <!-- end row -->
                 </div>
             </div>
             <div class="col-md-1"></div>
-        </div>
-        <div id="resultImg">
+        </div>  <!-- end of top main row -->
 
-        </div>
         <h4 class='text-danger'>**Note: Please submit your result in this google form <a href="https://docs.google.com/forms/d/e/1FAIpQLSf1Npv0_pzBgZOSLVBN8K2AU7alvHKKUWpgyfNyLhtVOtldRw/viewform" target="_blank"> Click here</a></h4>
         <br>
         <p>These are the {{ myUser.wordCount }} unique words that you have used on your facebook status
         and the given word cloud shows them.</p>
         <!-- making the word cloud here -->
-        <div class="wcloud">
+        <div id="wordCloud" class="wcloud">
 
         </div>
-
-        <a class="btn btn-social btn-facebook" href="javascript:fbshareCurrentPage()" target="_blank" alt="Share on Facebook"><span class="fa fa-facebook"></span>Share on facebook</a>
+        <canvas width="960" height="500" style="display:none"></canvas>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <input id="getText" type="text" name="getText" class="form-control " placeholder="Write something about your results" />
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+        <br>
+        <a class="btn btn-social btn-facebook" onclick="postCanvasToFacebook()" role="button" target="_blank" alt="Post result on Facebook"><span class="fa fa-facebook"></span>Post result on facebook</a>
 
 
       </div>

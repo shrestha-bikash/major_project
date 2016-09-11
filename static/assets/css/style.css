@@ -284,13 +284,17 @@ h1::after {
   to{ bottom:0; opacity:1 }
 }
 
-
+/*customizing the bootstrap css and custom css*/
 .progress {
+    height: 30px;
     margin-bottom: 5px;
 }
 
 .progress-bar {
-    text-align: left;
+  padding: 5px;
+  font-size: 1.15em;
+  font-weight: 600;
+  text-align: left;
 }
 
 .rating-desc {
@@ -306,5 +310,5 @@ h1::after {
 }
 .trait-size-big{
   font-size: 1.1em;
-
+  font-weight: 600;
 }

@@ -21,12 +21,14 @@ FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
 # initialization
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dtspyortohlevx:R4sLteXpCGMY1WdZ3KORtnIylP@ec2-54-243-190-37.compute-1.amazonaws.com:5432/d72udbjagl2df0'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dtspyortohlevx:R4sLteXpCGMY1WdZ3KORtnIylP@ec2-54-243-190-37.compute-1.amazonaws.com:5432/d72udbjagl2df0'
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://bikash:asdf@localhost/userData'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.config.update(
-    DEBUG = True,
+    DEBUG = False,
 )
 app.secret_key = SECRET_KEY
 
@@ -34,6 +36,7 @@ oauth = OAuth()
 
 db = SQLAlchemy(app)
 
+# defining the class for database fields
 class Users(db.Model):
    __tablename__ = 'users'
    id = db.Column('id', db.Integer, primary_key = True)
@@ -61,6 +64,7 @@ class Users(db.Model):
         self.wordCount = wordCount
         self.wordList = wordList
 
+# setting the oauth for facebook integration
 facebook = oauth.remote_app('facebook',
     base_url='https://graph.facebook.com/',
     request_token_url=None,
@@ -68,9 +72,10 @@ facebook = oauth.remote_app('facebook',
     authorize_url='https://www.facebook.com/dialog/oauth',
     consumer_key=FACEBOOK_APP_ID,
     consumer_secret=FACEBOOK_APP_SECRET,
-    request_token_params={'scope': ('public_profile, email, user_posts')}
+    request_token_params={'scope': ('public_profile, email, user_posts','publish_actions')}
 )
 
+# loading the dataset from static file
 data = np.loadtxt("static/trainingFeature.txt", delimiter =' ')
 X = data[:, 0:13099]
 
@@ -80,6 +85,7 @@ X = data[:, 0:13099]
 y = data[:, 13099:13104]
 y = y.transpose()
 
+# defining the our svm model for prediction
 def svm_Model(X, y, Xt):
     model = OneVsRestClassifier(svm.LinearSVC(C=1)).fit(X,y)
 
@@ -107,7 +113,8 @@ def replaceTwoOrMore(s):
         #look for 2 or more repetitions of character and replace with the character itself
         pattern = re.compile(r"(.)\1{1,}", re.DOTALL)
         return pattern.sub(r"\1\1", s)
-#nd
+#end
+
 #start getStopWordList
 def getStopWordList(stopWordListFileName):
         #read the stopwords file and build a list
@@ -147,17 +154,18 @@ def getFeatureVector(status, stopWords):
         return featureVector
 #end
 
+# getting the stopwords stored in static file
 st = open('static/project/stopwords.txt', 'r')
 stopwords = getStopWordList('static/project/stopwords.txt')
-#with open('posts.txt', 'r') as f:
-#    post = [line.rstrip('\n') for line in f]
 
+# getting the bag of words stored in static file
 tot = open('static/bagofword.txt', 'r').read()
 totalbagofwords = eval(tot)
 
 usermap = {}
 
-
+#processing the status here and finding the feature vectors
+#getting each status of the user and pre processing it using processStatus and getFeatureVector functions
 def getStatus(inpstatus):
 
     bagcount = {}
@@ -177,7 +185,7 @@ def getStatus(inpstatus):
     if (len(usermap)<10):
         feature = [0]
         return feature
-
+    # calculating the tf-idf values here
     else:
         maxcount = {}
         for i in usermap:
@@ -189,6 +197,8 @@ def getStatus(inpstatus):
         return feature
 
 # controllers
+#that defines what to do when a link is clicked
+#render_template function render the html templates
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -205,7 +215,7 @@ def favicon():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('404.html')
 
 @app.route("/privacy")
 def privacy():
@@ -214,10 +224,6 @@ def privacy():
 @app.route("/tos")
 def tos():
     return render_template('tos.html')
-
-@app.route("/share")
-def share():
-    return render_template('share.html')
 
 
 #----------------------------------------
@@ -235,7 +241,6 @@ def pop_login_session():
 
 @app.route("/facebook_login")
 def facebook_login():
-    session.clear()
     return facebook.authorize(callback=url_for('facebook_authorized',
         next=request.args.get('next'), _external=True))
 
@@ -250,10 +255,11 @@ def facebook_authorized(resp):
     session['logged_in'] = True
     session['oauth_token'] = (resp['access_token'], '')
 
-
+    # getting the user public profile
     getme = facebook.get('/me')
     me = getme.data
 
+    # getting the user's recent 1000 posts
     getposts = facebook.get('/me/posts?limit=1000')
     if getposts.status == 200:
         data = getposts.data
@@ -261,17 +267,18 @@ def facebook_authorized(resp):
         getposts =None
         flash('Unable to load the posts from facebook.')
 
+    # getting the user's profile picture
     user_photo = facebook.get('/me/picture?type=large&redirect=false').data
     photo_url = user_photo['data']['url']
 
-    posts = []
+    posts = [] #to store the user's statuses only
 
+    # getting user name
     if 'id' in me and 'name' in me:
-
         user_id = int(me['id'])
         user_name = str(me['name'].encode('utf-8'))
 
-
+    # getting user status only from all the posts
     for i in data['data']:
         for k in i:
             if k == 'message':
