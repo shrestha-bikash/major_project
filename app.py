@@ -3,6 +3,7 @@ import json
 import re
 import random
 import operator
+import helper
 import numpy as np
 from sklearn import svm
 from sklearn import decomposition
@@ -13,7 +14,7 @@ from flask_oauth import OAuth
 from flask_sqlalchemy import SQLAlchemy
 
 
-SECRET_KEY = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+SECRET_KEY = os.urandom(24)
 FACEBOOK_APP_ID = '1309139539100169'
 FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
 
@@ -21,11 +22,14 @@ FACEBOOK_APP_SECRET = '05ad2dab2c8cf4a6e7ec919f63b05073'
 # initialization
 app = Flask(__name__)
 
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 300
+'''database url for heroku server'''
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dtspyortohlevx:R4sLteXpCGMY1WdZ3KORtnIylP@ec2-54-243-190-37.compute-1.amazonaws.com:5432/d72udbjagl2df0'
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+'''database url for localhost'''
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://bikash:asdf@localhost/userData'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.session_interface = helper.RedisSessionInterface()
 
 app.config.update(
     DEBUG = False,
@@ -162,12 +166,12 @@ stopwords = getStopWordList('static/project/stopwords.txt')
 tot = open('static/bagofword.txt', 'r').read()
 totalbagofwords = eval(tot)
 
-usermap = {}
 
-#processing the status here and finding the feature vectors
+
+#processing the status here and finding the usermap i.e bag of words of the user
 #getting each status of the user and pre processing it using processStatus and getFeatureVector functions
 def getStatus(inpstatus):
-
+    usermap = {}
     bagcount = {}
 
     for row in inpstatus:
@@ -180,7 +184,10 @@ def getStatus(inpstatus):
                 bagcount[word] += 1
                 count = featureVector[word]
                 usermap[word] = count
+    return usermap
 
+# getting the actual feature vectors that is input to the model using the usermap(BOW of user)
+def getFeatures(usermap):
 
     if (len(usermap)<10):
         feature = [0]
@@ -225,7 +232,13 @@ def privacy():
 def tos():
     return render_template('tos.html')
 
-
+# No cacheing at all for API endpoints.
+@app.after_request
+def add_header(response):
+    # response.cache_control.no_store = True
+    if 'Cache-Control' not in response.headers:
+        response.headers['Cache-Control'] = 'no-store'
+    return response
 #----------------------------------------
 # facebook authentication
 #----------------------------------------
@@ -241,6 +254,7 @@ def pop_login_session():
 
 @app.route("/facebook_login")
 def facebook_login():
+    session.clear()
     return facebook.authorize(callback=url_for('facebook_authorized',
         next=request.args.get('next'), _external=True))
 
@@ -270,7 +284,7 @@ def facebook_authorized(resp):
     # getting the user's profile picture
     user_photo = facebook.get('/me/picture?type=large&redirect=false').data
     photo_url = user_photo['data']['url']
-
+    session['url'] = photo_url
     posts = [] #to store the user's statuses only
 
     # getting user name
@@ -286,7 +300,8 @@ def facebook_authorized(resp):
                 posts.append(str(msg.encode('utf-8')))
 
 
-    feature = getStatus(posts)
+    usermap = getStatus(posts)
+    feature = getFeatures(usermap)
     #testpca = decomposition.PCA(n_components = 10).fit(feature)
     #Xt = testpca.transform(feature)
     if len(feature) < 2:
@@ -298,7 +313,6 @@ def facebook_authorized(resp):
         agr = svm_Model(X, y[3], feature)
         neu = svm_Model(X, y[4], feature)
 
-    session['url'] = photo_url
 
     check_user = Users.query.filter_by(userID=str(user_id)).first()
 
@@ -312,7 +326,7 @@ def facebook_authorized(resp):
         check_user.con = int(con[0])
         check_user.ext = int(ext[0])
         check_user.agr = int(agr[0])
-        check_user.neu = int(neu[0])
+        check_user.neu = int(agr[0])
         check_user.wordCount = int(len(usermap))
         check_user.wordList = str(usermap)
         db.session.commit()
