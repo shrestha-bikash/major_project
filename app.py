@@ -3,7 +3,6 @@ import json
 import re
 import random
 import operator
-import helper
 import numpy as np
 from sklearn import svm
 from sklearn import decomposition
@@ -29,7 +28,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dtspyortohlevx:R4sLteXpCGM
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://bikash:asdf@localhost/userData'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.session_interface = helper.RedisSessionInterface()
 
 app.config.update(
     DEBUG = False,
