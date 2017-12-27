@@ -23,9 +23,9 @@ app = Flask(__name__)
 
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 300
 '''database url for heroku server'''
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dtspyortohlevx:R4sLteXpCGMY1WdZ3KORtnIylP@ec2-54-243-190-37.compute-1.amazonaws.com:5432/d72udbjagl2df0'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dtspyortohlevx:R4sLteXpCGMY1WdZ3KORtnIylP@ec2-54-243-190-37.compute-1.amazonaws.com:5432/d72udbjagl2df0'
 '''database url for localhost'''
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://bikash:asdf@localhost/userData'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://bikash:asdf@localhost/userdata'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -74,7 +74,7 @@ facebook = oauth.remote_app('facebook',
     authorize_url='https://www.facebook.com/dialog/oauth',
     consumer_key=FACEBOOK_APP_ID,
     consumer_secret=FACEBOOK_APP_SECRET,
-    request_token_params={'scope': ('public_profile, email, user_posts','publish_actions')}
+    request_token_params={'scope': ('public_profile, email, user_posts')}
 )
 
 # loading the dataset from static file
@@ -291,6 +291,7 @@ def facebook_authorized(resp):
         user_name = str(me['name'].encode('utf-8'))
 
     # getting user status only from all the posts
+    print 'data', data
     for i in data['data']:
         for k in i:
             if k == 'message':
