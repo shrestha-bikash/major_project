@@ -13,3 +13,7 @@ Open your browser and go to localhost:5000
 ```sh
 If there is problem with database try removing all the code related to SQLAlchemy and db
 ```
+### Update
+```sh
+Due to changes in facebook login policy, current facebook login code may not work.
+```
